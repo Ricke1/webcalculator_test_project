@@ -3,4 +3,5 @@
 
 Код написан на версии Python 3.9. 
 
+Для запуска тестирования ввести в консоль команду pytest ...\work_start\test_webcalculator.py
 

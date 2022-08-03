@@ -1,5 +1,4 @@
 import os
-
 from .req.base_request import BaseRequest
 
 
@@ -95,6 +94,7 @@ def test_webcalculator_change_host_and_port_address_and_possibility_of_restart()
 # Тест проверяющий правильность возвращения кода ошибки 1
 def test_error_code_1():
     print("\nТест проверяющий правильность возвращения кода ошибки 1".upper())
+
     os.system('work_start\\webcalculator.exe start')
 
     error_code = BaseRequest.correct_error_answer_form()
