@@ -102,15 +102,15 @@ class BaseRequest:
 
     # Проверка на правильность возвращаемых ошибок
     @staticmethod
-    def correct_error_answer_form(test_case=1):
-        # В данном сценарии рассматривается код ошибки 1
-        if test_case == 1:
+    def correct_error_answer_form(args=None):
+        if args is None:
             args = {"x": 100, "y": 0}
-            try:
+        try:
+            if args == {'x':0,'y':0}:
+                r = requests.post(ApiLocators.DIVISION_API_URL, data=args)
+            else:
                 r = requests.post(ApiLocators.DIVISION_API_URL, json=args)
-                info = r.json()
-                print("info[statusCode] =", info['statusCode'])
-                if info['statusCode'] == 1:
-                    return True
-            except requests.exceptions.ConnectionError:
-                assert False, "Не удалось установить соединение, возможно приложение не запущено"
+        except requests.exceptions.ConnectionError:
+            assert False, "Не удалось установить соединение, возможно приложение не запущено"
+        info = r.json()
+        return info['statusCode']
