@@ -23,14 +23,13 @@ class BaseRequest:
             else:
                 return False
 
-
         elif self.name == "addition" and self.type == "POST":
             try:
                 r = requests.post(ApiLocators.ADDITION_API_URL, json=args)
             except requests.exceptions.ConnectionError:
                 assert False, "Не удалось установить соединение, возможно приложение не запущено"
             info = r.json()
-            if info['statusCode'] == 0 and info['result'] == (args['x']+args['y']):
+            if info['statusCode'] == 0 and info['result'] == (args['x'] + args['y']):
                 return True
             else:
                 return False
@@ -41,7 +40,7 @@ class BaseRequest:
             except requests.exceptions.ConnectionError:
                 assert False, "Не удалось установить соединение, возможно приложение не запущено"
             info = r.json()
-            if info['statusCode'] == 0 and info['result'] == (args['x']*args['y']):
+            if info['statusCode'] == 0 and info['result'] == (args['x'] * args['y']):
                 print(args['x'] * args['y'])
                 return True
             else:
@@ -53,7 +52,7 @@ class BaseRequest:
             except requests.exceptions.ConnectionError:
                 assert False, "Не удалось установить соединение, возможно приложение не запущено"
             info = r.json()
-            if info['statusCode'] == 0 and info['result'] == (args['x']//args['y']):
+            if info['statusCode'] == 0 and info['result'] == (args['x'] // args['y']):
                 return True
             else:
                 return False
@@ -64,7 +63,7 @@ class BaseRequest:
             except requests.exceptions.ConnectionError:
                 assert False, "Не удалось установить соединение, возможно приложение не запущено"
             info = r.json()
-            if info['statusCode'] == 0 and info['result'] == (args['x']%args['y']):
+            if info['statusCode'] == 0 and info['result'] == (args['x'] % args['y']):
                 return True
             else:
                 return False
@@ -72,4 +71,13 @@ class BaseRequest:
         else:
             assert False, "Неправильный формат запроса"
 
-
+    @staticmethod
+    def check_application_management_functionality(test_mode=1):
+        # Если test_mode = 1, то происходит проверка: Выключился ли калькулятор?
+        if test_mode == 1:
+            try:
+                r = requests.get(ApiLocators.STATE_API_URL)
+            except requests.exceptions.ConnectionError:
+                assert False, "Не удалось установить соединение, возможно приложение не запущено"
+        elif test_mode == 2:
+            return False
