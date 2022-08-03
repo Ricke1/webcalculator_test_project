@@ -5,7 +5,6 @@ from .req.base_request import BaseRequest
 # Проверка на корректность формата запроса/ответа для API-методов и значения по умолчанию
 def test_request_response_correctness():
     print('\nТест на корректность формата запроса/ответа'.upper())
-
     os.system('work_start\\webcalculator.exe stop')
     os.system('work_start\\webcalculator.exe start')
 
@@ -58,7 +57,7 @@ def test_calculations_correctness():
 
 # Проверка работаты калькулятор после команды выключения
 def test_webcalculator_on_or_off():
-    print("\nТест провяющий функционал выключения калькулятора".upper())
+    print("\nТест проверяющий функционал выключения калькулятора".upper())
 
     # Остановка калькулятора
     os.system('work_start\\webcalculator.exe stop')
