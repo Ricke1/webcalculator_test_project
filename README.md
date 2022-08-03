@@ -3,6 +3,6 @@
 
 Код написан на версии Python 3.9.13
 
-Для запуска тестирования ввести в консоль команду: pytest work_start\test_webcalculator.py. Из дирректории:
+Для запуска тестирования ввести в консоль команду: 'pytest work_start\test_webcalculator.py'. Из директории:
 ...webcalculator_test_project
 
