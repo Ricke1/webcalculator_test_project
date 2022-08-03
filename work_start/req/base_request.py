@@ -41,7 +41,6 @@ class BaseRequest:
                 assert False, "Не удалось установить соединение, возможно приложение не запущено"
             info = r.json()
             if info['statusCode'] == 0 and info['result'] == (args['x'] * args['y']):
-                print(args['x'] * args['y'])
                 return True
             else:
                 return False
@@ -71,15 +70,15 @@ class BaseRequest:
         else:
             assert False, "Неправильный формат запроса"
 
-    def check_application_management_functionality(self, test_mode=1):
+    def check_application_management_functionality(self, test_case=1):
         # Если test_mode = 1, то происходит проверка: Выключился ли калькулятор?
-        if test_mode == 1:
+        if test_case == 1:
             try:
                 requests.get(ApiLocators.STATE_API_URL)
             except requests.exceptions.ConnectionError:
                 return True
-        # Если test_mode = 1, то происходит проверка:
-        elif test_mode == 2:
+        # Если test_mode = 2, то происходит проверка отправки запроса на сервер с другим адресом хоста и порта
+        elif test_case == 2:
             try:
                 r = requests.get(f"http://{self.name}:{self.typeof}/api/state")
                 print("Соединение установлено успешно")
@@ -91,3 +90,27 @@ class BaseRequest:
                 return True
             else:
                 return False
+        # Если test_mode = 3, то проиходит проверка возможности рестарта вебкалькулятора с сохранением адреса и порта
+        elif test_case == 3:
+            try:
+                requests.get(f"http://{self.name}:{self.typeof}/api/state")
+                print("После перезапуска соединение установлено успешно")
+                return True
+            except requests.exceptions.ConnectionError:
+                assert False, "Не удалось установить соединение, возможно приложение не запущено или указан неверный " \
+                              "адресс "
+
+    # Проверка на правильность возвращаемых ошибок
+    @staticmethod
+    def correct_error_answer_form(test_case=1):
+        # В данном сценарии рассматривается код ошибки 1
+        if test_case == 1:
+            args = {"x": 100, "y": 0}
+            try:
+                r = requests.post(ApiLocators.DIVISION_API_URL, json=args)
+                info = r.json()
+                print("info[statusCode] =", info['statusCode'])
+                if info['statusCode'] == 1:
+                    return True
+            except requests.exceptions.ConnectionError:
+                assert False, "Не удалось установить соединение, возможно приложение не запущено"
