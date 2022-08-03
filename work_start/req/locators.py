@@ -6,4 +6,3 @@ class ApiLocators:
     MULTIPLICATION_API_URL = f"http://{IP}:{PORT}/api/multiplication"
     DIVISION_API_URL = f"http://{IP}:{PORT}/api/division"
     REMAINDER_API_URL = f"http://{IP}:{PORT}/api/remainder"
-

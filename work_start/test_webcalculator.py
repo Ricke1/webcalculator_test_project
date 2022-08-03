@@ -1,7 +1,5 @@
 import os
 
-import pytest
-
 from .req.base_request import BaseRequest
 
 
@@ -75,7 +73,7 @@ def test_webcalculator_on_or_off():
 
 # Проверка возможности смены адреса хоста/порта
 def test_webcalculator_change_host_and_port_address_and_possibility_of_restart():
-    print('\nТест проверяющий возможность смееы адреса хоста/порта'.upper())
+    print('\nТест проверяющий возможность смены адреса хоста/порта'.upper())
     IP = 'localhost'
     PORT = '5413'
 
@@ -146,7 +144,7 @@ def test_error_code_4():
 def test_error_code_5():
     print("\nТест проверяющий правильность возвращения кода ошибки 5".upper())
 
-    args = {"x": 0,"y":0}
+    args = {"x": 0, "y": 0}
     error_code = BaseRequest.correct_error_answer_form(args)
     assert error_code == 5, f'Ожидается код ошибки: 5. Получен код ошибки: {error_code}'
 
